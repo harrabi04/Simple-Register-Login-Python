@@ -7,7 +7,7 @@ def Loginbut():
     print(loginv)
     password=pwd.get()
     print(password)
-    info="usr_login=t/usr_pwd=t"
+    info="usr_login="+loginv+"/usr_pwd="+password
     read=open(DB,'r')
     found=False
     for line in read:
@@ -18,7 +18,28 @@ def Loginbut():
         else:
             messagebox.showerror("login not found, Please try again")
     read.close()
-    
+def Regbutt():  
+    print("Please enter your Informations")
+    newlogin = input("Enter your Login: ")
+    while True:
+        newpassword = input("type a new password: ")
+        password_check = input("Confirm your password: ")
+        if newpassword == password_check:
+            break
+        else:
+            print("password doesn't match")
+    newinfo = "usr_login=" + newlogin + "/usr_pwd=" + newpassword
+    write = open(DB, 'a+')
+    write.seek(0)
+    data = write.read(10000)
+    if len(data) > 0:
+        write.write("\n")
+        write.write(newinfo)
+    else:
+        write.write(newinfo)
+    write.close()
+    print("account created successfully ") 
+    return
 login= StringVar()
 pwd= StringVar()
 window.iconbitmap()
