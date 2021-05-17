@@ -1,7 +1,76 @@
+from tkinter import *
+from tkinter import messagebox
+window= Tk()
 DB="database.txt"
-print("---Welcome to Login Script---")
-print("If you already have an account please type YES, if not type NO to register")
-confirmation='No'
+def Loginbut():
+    loginv=login.get()
+    print(loginv)
+    password=pwd.get()
+    print(password)
+    info="usr_login=t/usr_pwd=t"
+    read=open(DB,'r')
+    found=False
+    for line in read:
+        if info in line:
+            found=True
+        if found==True:
+            messagebox.showinfo("login successful ")
+        else:
+            messagebox.showerror("login not found, Please try again")
+    read.close()
+    
+login= StringVar()
+pwd= StringVar()
+window.iconbitmap()
+window.geometry("400x400")
+window.title("Password Checker")
+#Login
+label=Label(text='Login :', font=("Arial",20)).place(x=20,y=50, anchor=W )
+loginiput=Entry(textvariable=login).place(x=20,y=80, anchor=W)
+#Password
+label=Label(text='Password :', font=("Arial",20)).place(x=210,y=50, anchor=W )
+pwdiput=Entry(textvariable=pwd).place(x=210,y=80, anchor=W)
+LoginButton= Button(text="Login" ,width=6, height=1, command=Loginbut).place(x=100,y=210, anchor=CENTER  )
+'''label=Label(text='Password:', width=40, height=10).place(x=50,y=100, anchor=CENTER )
+pwdiput=Entry(textvariable=pwd).place(x=25,y=120)
+LoginButton= Button(text="Login" ,width=8, height=1, bd=5).place(x=250,y=280, anchor=CENTER  )'''
+
+
+window.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''confirmation='No'
 login=True
 def answer():
     while True:
@@ -14,22 +83,7 @@ def answer():
 def yes():
     while True:
         print("please enter your informations")
-        login=input("Login: ")
-        password=input("Password: ")
-        info="usr_login="+login+"/usr_pwd="+password
-        read=open(DB,'r')
-        found=False
-        for line in read:
-            if info in line:
-             found=True
-        if found==True:
-            print("login successful ")
-            global T
-            login=False
-            break
-        else:
-             print("login not found, Please try again! ")
-        read.close()
+        
 def no():
     print("Please enter your Informations")
     newlogin = input("Enter your Login: ")
@@ -61,5 +115,5 @@ while login==True:
         no()
     if confirmation.upper() == "NO":
         break
-
+'''
 
