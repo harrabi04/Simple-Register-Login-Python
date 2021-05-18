@@ -1,3 +1,4 @@
+'''Python Login/Register BY MOATAZ HARRABI (https://github.com/harrabi04)'''
 from tkinter import *
 from tkinter import messagebox
 window= Tk()
@@ -13,50 +14,57 @@ def Loginbut():
     for line in read:
         if info in line:
             found=True
-        if found==True:
-            messagebox.showinfo("login successful ")
-        else:
-            messagebox.showerror("login not found, Please try again")
+    if found==True:
+        messagebox.showinfo("Success","login successful")
+    else:
+        messagebox.showerror("login Error","login not found, Please try again")
     read.close()
 def Regbutt():  
-    print("Please enter your Informations")
-    newlogin = input("Enter your Login: ")
-    while True:
-        newpassword = input("type a new password: ")
-        password_check = input("Confirm your password: ")
-        if newpassword == password_check:
-            break
+    newloginv = newlogin.get()
+    newpasswordv = newpassword.get()
+    password_checkv =password_check.get()
+    if newpasswordv == password_checkv:
+        newinfo = "usr_login=" + newloginv + "/usr_pwd=" + newpasswordv
+        write = open(DB, 'a+')
+        write.seek(0)
+        data = write.read(10000)
+        if len(data) > 0:
+            write.write("\n"+newinfo)
         else:
-            print("password doesn't match")
-    newinfo = "usr_login=" + newlogin + "/usr_pwd=" + newpassword
-    write = open(DB, 'a+')
-    write.seek(0)
-    data = write.read(10000)
-    if len(data) > 0:
-        write.write("\n")
-        write.write(newinfo)
+            write.write(newinfo)
+        write.close()
+        messagebox.showinfo("Success", ("Account created succesfully"))
     else:
-        write.write(newinfo)
-    write.close()
-    print("account created successfully ") 
+        messagebox.showwarning("Password conflit","password doesn't match")
     return
 login= StringVar()
 pwd= StringVar()
-window.iconbitmap()
+newpassword= StringVar()
+newlogin= StringVar()
+password_check= StringVar()
+window.iconbitmap("Lock.ico")
 window.geometry("400x400")
 window.title("Password Checker")
-#Login
-label=Label(text='Login :', font=("Arial",20)).place(x=20,y=50, anchor=W )
-loginiput=Entry(textvariable=login).place(x=20,y=80, anchor=W)
-#Password
-label=Label(text='Password :', font=("Arial",20)).place(x=210,y=50, anchor=W )
-pwdiput=Entry(textvariable=pwd).place(x=210,y=80, anchor=W)
-LoginButton= Button(text="Login" ,width=6, height=1, command=Loginbut).place(x=100,y=210, anchor=CENTER  )
-'''label=Label(text='Password:', width=40, height=10).place(x=50,y=100, anchor=CENTER )
-pwdiput=Entry(textvariable=pwd).place(x=25,y=120)
-LoginButton= Button(text="Login" ,width=8, height=1, bd=5).place(x=250,y=280, anchor=CENTER  )'''
-
-
+#Register_Buttom_Label
+label=Label(text='Login:', font=("Arial",20)).place(x=20,y=20, anchor=W )
+LoginButton= Button(text="Login" ,width=6, height=1, command=Loginbut).place(x=20,y=135, anchor=W  )
+#Email_Login
+label=Label(text='Email:', font=("Arial",16)).place(x=20,y=65, anchor=W )
+loginiput=Entry(textvariable=login).place(x=20,y=95, anchor=W)
+#Password_Login
+label=Label(text='Password :', font=("Arial",16)).place(x=210,y=65, anchor=W )
+pwdiput=Entry(textvariable=pwd, show="*").place(x=210,y=95, anchor=W)
+#Register_Buttom_Label
+label=Label(text='Register:', font=("Arial",20)).place(x=20,y=190, anchor=W )
+LoginButton= Button(text="Register" ,width=10, height=3, command=Regbutt).place(x=250,y=315, anchor=W  )
+#Email_Register
+label=Label(text='Email :', font=("Arial",16)).place(x=20,y=225, anchor=W )
+loginiput=Entry(textvariable=newlogin).place(x=20,y=250, anchor=W)
+#Password_Resgister
+label=Label(text='Password :', font=("Arial",16)).place(x=20,y=285, anchor=W )
+loginiput=Entry(textvariable=newpassword, show="*").place(x=20,y=310, anchor=W)
+label=Label(text='Confirm Password :', font=("Arial",16)).place(x=20,y=345, anchor=W )
+loginiput=Entry(textvariable=password_check, show="*").place(x=20,y=370, anchor=W)
 window.mainloop()
 
 
