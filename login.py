@@ -9,7 +9,10 @@ def Loginbut():
     password=pwd.get()
     print(password)
     info="usr_login="+loginv+"/usr_pwd="+password
-    read=open(DB,'r')
+    try:
+        read=open(DB,'r')
+    except:
+        messagebox.showerror("login Error","login not found, Please try again")
     found=False
     for line in read:
         if info in line:
