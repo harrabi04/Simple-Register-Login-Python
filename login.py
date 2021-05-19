@@ -5,9 +5,7 @@ window= Tk()
 DB="database.txt"
 def Loginbut():
     loginv=login.get()
-    print(loginv)
     password=pwd.get()
-    print(password)
     info="usr_login="+loginv+"/usr_pwd="+password
     try:
         read=open(DB,'r')
