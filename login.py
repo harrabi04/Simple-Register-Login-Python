@@ -42,7 +42,7 @@ pwd= StringVar()
 newpassword= StringVar()
 newlogin= StringVar()
 password_check= StringVar()
-window.iconbitmap("Lock.ico")
+window.iconbitmap("login.ico")
 window.geometry("400x400")
 window.title("Login/Register")
 #Register_Buttom_Label
