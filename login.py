@@ -44,7 +44,7 @@ newlogin= StringVar()
 password_check= StringVar()
 window.iconbitmap("Lock.ico")
 window.geometry("400x400")
-window.title("Password Checker")
+window.title("Login/Register")
 #Register_Buttom_Label
 label=Label(text='Login:', font=("Arial",20)).place(x=20,y=20, anchor=W )
 LoginButton= Button(text="Login" ,width=6, height=1, command=Loginbut).place(x=20,y=135, anchor=W  )
